@@ -11,6 +11,13 @@ struct Planet: Identifiable, Codable {
     var id: String
     var englishName: String
     var isPlanet: Bool
+    var gravity: Double?
+    var density: Double?
+    var mass: MassInfo?        // Mass details
+       struct MassInfo: Codable {
+           var massValue: Double
+           var massExponent: Int
+       }
 }
 
 struct SolarSystemResponse: Codable {
@@ -23,7 +30,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(planets) { planet in
-                NavigationLink(destination: Text(planet.englishName)) {
+                NavigationLink(destination: FactsView(planet: planet)) {
                     Text(planet.englishName)
                 }
             }
